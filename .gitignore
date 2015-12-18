@@ -8,14 +8,17 @@
 *.unityproj
 *.sln
 *.suo
-*.tmp
 *.user
 *.userprefs
 *.pidb
 *.booproj
+*#
+*~
 
-# Unity3D generated meta files
-*.pidb.meta
-
-# Unity3D Generated File On Crash Reports
+#Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+Battle of Dreygard/ProjectSettings/ProjectVersion.txt
+/Models/*
+AnimTest/
+*autosave.kra
