@@ -28,7 +28,7 @@ public class PlatformTurning : MonoBehaviour
         }
         else
         {
-            float t = Input.GetAxis("Vertical");
+            float t = Input.GetAxis("Vertical2");
 
             transform.RotateAround(transform.position, Vector3.forward, t * speed * Time.deltaTime);
         }
