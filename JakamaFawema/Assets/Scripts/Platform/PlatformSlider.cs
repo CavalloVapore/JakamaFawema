@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlatformSlider : MonoBehaviour
 {
     public float speed = 3f;

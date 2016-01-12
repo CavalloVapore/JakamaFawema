@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.IO.Ports;
 
 public class PlatformTurning : MonoBehaviour
 {
-
+    //SerialPort stream = new SerialPort("COM6", 115200);
+    //string receivedData = "EMPTY";
     public float speed = 3f;
     public bool turner1 = true;
     public bool turner2 = false;
@@ -12,13 +14,13 @@ public class PlatformTurning : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CheckTurnerAcive();
+        CheckTurnerActive();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckTurnerAcive();
+        CheckTurnerActive();
 
         if (turner1)
         {
@@ -34,7 +36,7 @@ public class PlatformTurning : MonoBehaviour
         }
     }
 
-    void CheckTurnerAcive()
+    void CheckTurnerActive()
     {
         if(turner1 == turner2)
         {

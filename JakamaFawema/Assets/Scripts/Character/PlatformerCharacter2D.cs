@@ -27,8 +27,13 @@ namespace UnityStandardAssets._2D
             m_CeilingCheck = transform.Find("CeilingCheck");
             m_Anim = GetComponent<Animator>();
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
         }
 
+        public bool getGrounded()
+        {
+            return m_Grounded;
+        }
 
         private void FixedUpdate()
         {
