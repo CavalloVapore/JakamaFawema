@@ -7,9 +7,9 @@ public class Controller : MonoBehaviour{
     static SerialPort stream = new SerialPort("COM6", 115200);
     static string receivedData = "EMPTY";
 
-    public static bool c_Jump = false; 
-
     public static Controller sharedInstance = new Controller();
+
+    private bool running = false;
 
 	// Use this for initialization
 
@@ -19,19 +19,50 @@ public class Controller : MonoBehaviour{
 
     private void streamStart()
     {
-        if (!stream.IsOpen) stream.Open();
-        Debug.Log("baum");
+        try
+        {
+            if (!stream.IsOpen)
+            {
+                stream.Open();
+                running = true;
+            }            
+            Debug.Log("SerialPort open and running");
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("SerialPort missing");
+        }
+        
     }
 
-    private int write(string toWrite)
+    private string write(string toWrite)
     {
-        stream.Write(toWrite);
-        receivedData = stream.ReadLine();
-        return System.Convert.ToInt32(receivedData, 16);
+        try
+        {
+            stream.Write(toWrite);
+            receivedData = stream.ReadLine();
+            return receivedData;
+        }
+        catch (System.Exception e)
+        {
+            return "";
+        }
 
     }
 
-    public int getButtonVal() {
+    public string getButtonVal() {
+        //Debug.Log("getButton called");
         return write("1");
+    }
+
+    public string getAnalog()
+    {
+        return write("4");
+    }
+
+    public bool getRunning()
+    {
+        return running;
     }
 }

@@ -11,13 +11,20 @@ public class PlatformSlider : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CheckSliderAcive();
+        CheckSliderActive();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckSliderAcive();
+        CheckSliderActive();
+
+        int sliderA = 0;
+        if (Controller.sharedInstance != null){
+            string[] a_inputs = null;
+            a_inputs = Controller.sharedInstance.getAnalog().Split();
+            sliderA = System.Convert.ToInt32(a_inputs[1], 16);
+        }
 
         if (slider1)
         {
@@ -33,7 +40,7 @@ public class PlatformSlider : MonoBehaviour
         }
     }
 
-    void CheckSliderAcive()
+    void CheckSliderActive()
     {
         if (slider1 == slider2)
         {

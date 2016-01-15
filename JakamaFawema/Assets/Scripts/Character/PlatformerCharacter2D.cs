@@ -35,6 +35,10 @@ namespace UnityStandardAssets._2D
             return m_Grounded;
         }
 
+        public void setGrounded(bool toGround)
+        {
+            m_Grounded = toGround;
+        }
         private void FixedUpdate()
         {
             m_Grounded = false;
@@ -45,9 +49,14 @@ namespace UnityStandardAssets._2D
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i].gameObject != gameObject)
+                {
                     m_Grounded = true;
+                    Debug.Log("Grounded set true");
+                }
             }
             m_Anim.SetBool("Ground", m_Grounded);
+
+            Debug.Log(m_Grounded);
 
             // Set the vertical animation
             m_Anim.SetFloat("vSpeed", m_Rigidbody2D.velocity.y);
@@ -101,6 +110,7 @@ namespace UnityStandardAssets._2D
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+                Debug.Log("AddedForce");
             }
         }
 
