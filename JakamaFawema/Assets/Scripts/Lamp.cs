@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lamp : MonoBehaviour {
+public class Lamp : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public enum Color
+    {
+        red,
+        green,
+        blue,
+        yellow,
+    }
+
+    public Color LED;
+    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            
+        }
+    }
 }
