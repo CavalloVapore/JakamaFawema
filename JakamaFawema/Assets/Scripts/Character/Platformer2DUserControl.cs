@@ -56,7 +56,7 @@ namespace UnityStandardAssets._2D
                 //Debug.Log(time);
                 m_Jump = false;
                 time += Time.deltaTime;
-                if (timeJumped < time - 1.0f)
+                if (timeJumped < time - 0.85f)
                 {
                     jumped = false;
                 }                
