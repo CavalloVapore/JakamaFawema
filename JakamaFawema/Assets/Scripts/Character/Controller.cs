@@ -65,4 +65,9 @@ public class Controller : MonoBehaviour{
     {
         return running;
     }
+
+    public string setLed(int number, int status)
+    {
+        return write("l " + number + " " + status + "\r\n");
+    }
 }
