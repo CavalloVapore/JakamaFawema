@@ -11,12 +11,15 @@ public class PlatformSlider : MonoBehaviour
     public float horizontalBounds = 5.0f;
     public float verticalBounds = 5.0f;
     private Vector3 start;
+    private GameObject character;
+    private float lastSlider = 0f;
 
     // Use this for initialization
     void Start()
     {
         CheckSliderActive();
         start = transform.position;
+        character = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -24,28 +27,31 @@ public class PlatformSlider : MonoBehaviour
     {
         CheckSliderActive();
 
-        float sliderA = 0.0f;
-        float sliderB = 0.0f;
-        if (Controller.sharedInstance.getRunning())
+
+        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 30.0f)
         {
             string[] a_inputs = null;
             a_inputs = Controller.sharedInstance.getAnalog().Split();
-            sliderA = (float)(System.Convert.ToInt32(a_inputs[1], 16) / 32767.5f) - 1;
-            sliderB = (float)(System.Convert.ToInt32(a_inputs[0], 16) / 32767.5f) - 1;
             
             float slider = 0.0f;
             if (slider1)
-                slider = sliderA;
+                slider = (float)(System.Convert.ToInt32(a_inputs[4], 16) / 2000f) - 1;
             else if (slider2)
-                slider = sliderB;
+                slider = (float)(System.Convert.ToInt32(a_inputs[3], 16) / 2000f) - 1;
 
-            if (!moveVertical)
-                transform.position = new Vector3(transform.position.x + horizontalBounds * slider, transform.position.y);
-            else
-                transform.position = new Vector3(transform.position.x, transform.position.y + verticalBounds * slider);
+
+            if (Mathf.Abs(slider-lastSlider) >0.03)
+            {
+                if (!moveVertical && Mathf.Abs(start.x - (transform.position.x + horizontalBounds * slider)) < horizontalBounds)
+                    transform.position = new Vector3(start.x + horizontalBounds * slider, transform.position.y);
+                else if (moveVertical && Mathf.Abs(start.y - (transform.position.y + verticalBounds * slider)) < verticalBounds)
+                    transform.position = new Vector3(transform.position.x, start.y + verticalBounds * slider);
+                lastSlider = slider;
+            }
+
 
         }
-        else
+        else if (Vector3.Distance(transform.position, character.transform.position) < 30.0f)
         {
             float t = 0.0f;
             if (slider1)
@@ -61,6 +67,7 @@ public class PlatformSlider : MonoBehaviour
             else if (moveVertical && Mathf.Abs(start.y - (transform.position.y + t * speed * Time.deltaTime)) < verticalBounds)
                 transform.position = new Vector3(transform.position.x, transform.position.y + t * speed * Time.deltaTime);               
         }
+
     }
 
     void CheckSliderActive()

@@ -10,11 +10,14 @@ public class PlatformTurning : MonoBehaviour
     public float speed = 3f;
     public bool turner1 = true;
     public bool turner2 = false;
+    private GameObject character;
+    private float lastTurner = 0f;
 
     // Use this for initialization
     void Start()
     {
         CheckTurnerActive();
+        character = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -22,24 +25,25 @@ public class PlatformTurning : MonoBehaviour
     {
         CheckTurnerActive();
 
-        float turnerA = 0.0f;
-        float turnerB = 0.0f;
-        if (Controller.sharedInstance.getRunning())
+        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 30.0f)
         {
             string[] a_inputs = null;
             a_inputs = Controller.sharedInstance.getAnalog().Split();
-            turnerA = (float)(System.Convert.ToInt32(a_inputs[1], 16) / 65535.0f);
-            turnerB = (float)(System.Convert.ToInt32(a_inputs[0], 16) / 65535.0f);
 
             float turner = 0.0f;
             if (turner1)
-                turner = turnerA;
+                turner = (float)(System.Convert.ToInt32(a_inputs[2], 16) / 4100f);
             else if (turner2)
-                turner = turnerB;
-
-            transform.RotateAround(transform.position, Vector3.forward, turner);
+                turner = (float)(System.Convert.ToInt32(a_inputs[1], 16) / 4100f);
+            turner = Mathf.Round(turner * 360.0f);
+            //transform.RotateAround(transform.position, Vector3.forward, turner);
+            if (Mathf.Abs(turner - lastTurner)>1)
+            {
+                transform.rotation = Quaternion.AngleAxis(turner, Vector3.forward);
+                lastTurner = turner;
+            }
         }
-        else
+        else if (Vector3.Distance(transform.position, character.transform.position) < 30.0f)
         {
             if (turner1)
             {
