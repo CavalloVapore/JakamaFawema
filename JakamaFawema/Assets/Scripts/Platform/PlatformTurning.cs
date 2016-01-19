@@ -25,7 +25,7 @@ public class PlatformTurning : MonoBehaviour
     {
         CheckTurnerActive();
 
-        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 30.0f)
+        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 20.0f)
         {
             string[] a_inputs = null;
             a_inputs = Controller.sharedInstance.getAnalog().Split();
