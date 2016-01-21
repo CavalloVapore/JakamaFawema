@@ -4,6 +4,8 @@ using System.Collections;
 public class Lamp : MonoBehaviour
 {
 
+    private Door winCheck;
+
     public enum Color
     {
         red,
@@ -16,13 +18,13 @@ public class Lamp : MonoBehaviour
     
     void Start()
     {
+        winCheck = GameObject.FindGameObjectWithTag("Door").GetComponent<Door>();
 
-        //TODO
         Controller.sharedInstance.setLed(0, 0);
         Controller.sharedInstance.setLed(1, 0);
         Controller.sharedInstance.setLed(2, 0);
         Controller.sharedInstance.setLed(3, 0);
-        //all LEDs off
+
         gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1);
         gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
@@ -34,35 +36,39 @@ public class Lamp : MonoBehaviour
             switch (led)
             {
                 case (Color.red):
-                    //TODO
-                    //LED red on
                     Controller.sharedInstance.setLed(1, 1);
+
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(1, 0, 0);
+
+                    winCheck.red = true;
                     break;
 
                 case (Color.blue):
-                    //TODO
-                    //LED blue on
                     Controller.sharedInstance.setLed(0, 1);
+
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(0, 0, 1);
+
+                    winCheck.blue = true;
                     break;
 
                 case (Color.green):
-                    //TODO
-                    //LED green on
                     Controller.sharedInstance.setLed(3, 1);
+
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(0, 1, 0);
+
+                    winCheck.green = true;
                     break;
 
                 case (Color.yellow):
-                    //TODO
-                    //LED yellow on
                     Controller.sharedInstance.setLed(2, 1);
+
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = true;
                     gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 0);
+
+                    winCheck.yellow = true;
                     break;
             }
         }
