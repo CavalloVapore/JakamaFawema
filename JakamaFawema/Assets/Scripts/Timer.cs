@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class Timer : MonoBehaviour {
 
         if (timer <= 0)
         {
-
+            SceneManager.LoadScene("LoseScreen");
         }
 	}
 }
