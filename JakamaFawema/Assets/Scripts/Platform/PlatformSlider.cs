@@ -14,12 +14,16 @@ public class PlatformSlider : MonoBehaviour
     private GameObject character;
     private float lastSlider = 0f;
 
+    private ControllerInput input;
+
     // Use this for initialization
     void Start()
     {
         CheckSliderActive();
         start = transform.position;
         character = GameObject.FindGameObjectWithTag("Player");
+
+        input = GameObject.FindGameObjectWithTag("ControllerInput").GetComponent<ControllerInput>();
     }
 
     // Update is called once per frame
@@ -28,16 +32,13 @@ public class PlatformSlider : MonoBehaviour
         CheckSliderActive();
 
 
-        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 30.0f)
+        if (input.running && Vector3.Distance(transform.position, character.transform.position) < 30.0f)
         {
-            string[] a_inputs = null;
-            a_inputs = Controller.sharedInstance.getAnalog().Split();
-            
             float slider = 0.0f;
             if (slider1)
-                slider = (float)(System.Convert.ToInt32(a_inputs[4], 16) / 2000f) - 1;
+                slider = input.slider1;
             else if (slider2)
-                slider = (float)(System.Convert.ToInt32(a_inputs[3], 16) / 2000f) - 1;
+                slider = input.slider2;
 
 
             if (Mathf.Abs(slider-lastSlider) >0.03)

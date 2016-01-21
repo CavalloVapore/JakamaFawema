@@ -13,11 +13,15 @@ public class PlatformTurning : MonoBehaviour
     private GameObject character;
     private float lastTurner = 0f;
 
+    private ControllerInput input;
+
     // Use this for initialization
     void Start()
     {
         CheckTurnerActive();
         character = GameObject.FindGameObjectWithTag("Player");
+
+        input = GameObject.FindGameObjectWithTag("ControllerInput").GetComponent<ControllerInput>();
     }
 
     // Update is called once per frame
@@ -25,18 +29,15 @@ public class PlatformTurning : MonoBehaviour
     {
         CheckTurnerActive();
 
-        if (Controller.sharedInstance.getRunning() && Vector3.Distance(transform.position, character.transform.position) < 20.0f)
-        {
-            string[] a_inputs = null;
-            a_inputs = Controller.sharedInstance.getAnalog().Split();
-
+        if (input.running && Vector3.Distance(transform.position, character.transform.position) < 20.0f)
+        { 
             float turner = 0.0f;
             if (turner1)
-                turner = (float)(System.Convert.ToInt32(a_inputs[2], 16) / 4100f);
+                turner = input.turner1;
             else if (turner2)
-                turner = (float)(System.Convert.ToInt32(a_inputs[1], 16) / 4100f);
+                turner = input.turner2;
             turner = Mathf.Round(turner * 360.0f);
-            //transform.RotateAround(transform.position, Vector3.forward, turner);
+
             if (Mathf.Abs(turner - lastTurner)>1)
             {
                 transform.rotation = Quaternion.AngleAxis(turner, Vector3.forward);
