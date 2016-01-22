@@ -36,6 +36,15 @@ public class Controller : MonoBehaviour{
         
     }
 
+    public void switchOff()
+    {
+        Controller.sharedInstance.setLed(0, 0);
+        Controller.sharedInstance.setLed(1, 0);
+        Controller.sharedInstance.setLed(2, 0);
+        Controller.sharedInstance.setLed(3, 0);
+    }
+
+
     private string write(string toWrite)
     {
         try

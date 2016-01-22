@@ -20,14 +20,13 @@ public class Lamp : MonoBehaviour
     {
         winCheck = GameObject.FindGameObjectWithTag("Door").GetComponent<Door>();
 
-        Controller.sharedInstance.setLed(0, 0);
-        Controller.sharedInstance.setLed(1, 0);
-        Controller.sharedInstance.setLed(2, 0);
-        Controller.sharedInstance.setLed(3, 0);
+        Controller.sharedInstance.switchOff();
 
         gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().color = new UnityEngine.Color(1, 1, 1);
         gameObject.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
+
+ 
 
     private void OnTriggerEnter2D(Collider2D other)
     {

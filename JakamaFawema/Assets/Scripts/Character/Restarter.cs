@@ -10,6 +10,7 @@ namespace UnityStandardAssets._2D
         {
             if (other.tag == "Player")
             {
+                Controller.sharedInstance.switchOff();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }

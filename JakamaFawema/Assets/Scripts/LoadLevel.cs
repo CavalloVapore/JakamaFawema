@@ -24,6 +24,7 @@ public class LoadLevel : MonoBehaviour
 
     public void Load(string name)
     {
+        Controller.sharedInstance.switchOff();
         SceneManager.LoadScene(name);
     }
 }
