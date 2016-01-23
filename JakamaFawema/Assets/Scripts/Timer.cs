@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour {
 	void Update () {
         timer -= Time.deltaTime;
 
-        var minutes = timer / 60; //Divide the guiTime by sixty to get the minutes.  //aus dem Inet funzt nicht ganz wies soll
+        var minutes = (int)(timer / 60); //Divide the guiTime by sixty to get the minutes.  //aus dem Inet funzt nicht ganz wies soll
         var seconds = timer % 60;//Use the euclidean division for the seconds.
         var fraction = (timer * 100) % 100;
 
