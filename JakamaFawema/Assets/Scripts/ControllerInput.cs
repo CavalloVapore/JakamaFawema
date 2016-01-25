@@ -37,9 +37,11 @@ public class ControllerInput : MonoBehaviour
             a_inputs = Controller.sharedInstance.getAnalog().Split();
 
             turner1 = (float)(System.Convert.ToInt32(a_inputs[2], 16) / 4100f);
+            //Debug.Log("Turner: " + (System.Convert.ToInt32(a_inputs[2], 16)));
             turner2 = (float)(System.Convert.ToInt32(a_inputs[1], 16) / 4100f);
 
             slider1 = (float)(System.Convert.ToInt32(a_inputs[4], 16) / 2000f) - 1;
+            //Debug.Log("Slider: " + System.Convert.ToInt32(a_inputs[4], 16));
             slider2 = (float)(System.Convert.ToInt32(a_inputs[3], 16) / 2000f) - 1;
         }
         else

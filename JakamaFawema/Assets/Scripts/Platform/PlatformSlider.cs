@@ -41,7 +41,7 @@ public class PlatformSlider : MonoBehaviour
                 slider = input.slider2;
 
 
-            if (Mathf.Abs(slider-lastSlider) >0.03)
+            if (Mathf.Abs(slider-lastSlider) >0.01)
             {
                 if (!moveVertical && Mathf.Abs(start.x - (transform.position.x + horizontalBounds * slider)) < horizontalBounds)
                     transform.position = new Vector3(start.x + horizontalBounds * slider, transform.position.y);
@@ -49,7 +49,7 @@ public class PlatformSlider : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, start.y + verticalBounds * slider);
                 lastSlider = slider;
             }
-
+            
 
         }
         else if (Vector3.Distance(transform.position, character.transform.position) < 30.0f)

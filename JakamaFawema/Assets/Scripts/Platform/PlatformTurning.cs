@@ -38,7 +38,7 @@ public class PlatformTurning : MonoBehaviour
                 turner = input.turner2;
             turner = Mathf.Round(turner * 360.0f);
 
-            if (Mathf.Abs(turner - lastTurner)>1)
+            if (Mathf.Abs(turner - lastTurner)>3)
             {
                 transform.rotation = Quaternion.AngleAxis(turner, Vector3.forward);
                 lastTurner = turner;
