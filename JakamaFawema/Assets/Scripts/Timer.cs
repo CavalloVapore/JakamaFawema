@@ -17,8 +17,8 @@ public class Timer : MonoBehaviour {
         timer -= Time.deltaTime;
 
         var minutes = (int)(timer / 60); //Divide the guiTime by sixty to get the minutes.  //aus dem Inet funzt nicht ganz wies soll
-        var seconds = timer % 60;//Use the euclidean division for the seconds.
-        var fraction = (timer * 100) % 100;
+        var seconds = (int)(timer % 60);//Use the euclidean division for the seconds.
+        var fraction = (int)((timer * 100) % 100);
 
         //update the label value
         timerLabel.text = string.Format("{0:00} : {1:00} : {2:000}", minutes, seconds, fraction);
